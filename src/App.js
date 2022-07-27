@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import AddUser from "./components/AddForm/AddUser";
+import UsersDisplay from "./components/DisplayUsers/UsersDisplay";
 
 function App() {
+  // addUser will contain the updated "usersList".
+  // This means that every time one new user is added, he will be saved in "addUser" and therefore
+  // inserted in the "userList" array as a new object.
+  const [addUser, setAddUser] = useState([]);
+
+  const addUserHandler = (user) => {
+    setAddUser((previousState) => {
+      console.log("Arrived at App.js as props", user);
+      return [user, ...previousState];
+    });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AddUser addOnUser={addUserHandler} />
+      <UsersDisplay users={addUser} />
     </div>
   );
 }

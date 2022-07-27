@@ -1,0 +1,26 @@
+.addUser-wrapper {
+  background-color: #acd07c;
+  padding: 1rem;
+  margin: 2rem auto;
+  width: 50rem;
+  max-width: 95%;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+}
+
+.addUser-wrapper button {
+  font-family: inherit;
+  background-color: #a0bb7c;
+  padding: 1rem 2rem;
+  margin-left: 1rem;
+  border: 1px solid #627b44;
+  border-radius: 12px;
+  color: white;
+}
+
+.addUser-wrapper button:hover,
+.addUser-wrapper button:active {
+  background-color: #698446;
+  border-color: #3f4f2b;
+}
