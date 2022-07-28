@@ -32,6 +32,12 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    // Under to make possible the use of Portals, in this case for modal and
+    backdrop. // To not interfere with the structure of the main root
+    ("id="root""), we create Portals // to render them outside like a overlay.
+    <div id="backdrop-root"></div>
+    <div id="modal-root"></div>
+    // Under main root.
     <div id="root"></div>
     <!--
       This HTML file is a template.
