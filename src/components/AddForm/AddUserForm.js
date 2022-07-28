@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import Button from "../UI/Button";
 import ErrorModal from "../UI/ErrorModal";
 import styles from "./AddUserForm.module.css";
@@ -59,7 +59,7 @@ const AddUserForm = (props) => {
   };
 
   return (
-    <div>
+    <Fragment>
       {/* If an error happens the ErrorModal will be executed */}
       {error && (
         <ErrorModal
@@ -88,7 +88,7 @@ const AddUserForm = (props) => {
           <Button type="submit">Add Person</Button>
         </form>
       </div>
-    </div>
+    </Fragment>
   );
 };
 

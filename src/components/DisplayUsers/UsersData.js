@@ -5,8 +5,9 @@ import styles from "./UsersData.module.css";
 const UsersData = (props) => {
   return (
     <Card className={styles["usersData-wrapper"]}>
-      <div className="usersData-items">
-        <h3>{props.name}</h3>
+      <div className={styles["usersData-items"]}>
+        <h3>Name: </h3>
+        <h4>{props.name}</h4>
         <UsersDate age={props.age} />
       </div>
     </Card>
