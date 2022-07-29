@@ -1,30 +1,22 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useRef } from "react";
 import Button from "../UI/Button";
 import ErrorModal from "../UI/ErrorModal";
 import styles from "./AddUserForm.module.css";
 
 const AddUserForm = (props) => {
-  const [enteredUser, setEnteredUser] = useState("");
-  const [enteredAge, setEnteredAge] = useState("");
+  const addingUser = useRef();
+  const addingAge = useRef();
   const [error, setError] = useState();
 
   const handleCloseModal = () => {
     setError(null);
   };
 
-  const userNameSubmit = (event) => {
-    console.log("Name", enteredUser);
-    setEnteredUser(event.target.value);
-  };
-
-  const userAgeSubmit = (event) => {
-    console.log("Age", enteredAge);
-    setEnteredAge(event.target.value);
-  };
-
   const submitHandler = (e) => {
     e.preventDefault();
-    if (enteredUser.trim().length === 0) {
+    const addedUserInput = addingUser.current.value;
+    const addedAgeInput = addingAge.current.value;
+    if (addedUserInput.trim().length === 0) {
       // if the setError function is activated the title and message variables and their values
       // will be set on "error" variable by "setError".
       // then, when rendering it's possible to reach the information through "error.title or error.message".
@@ -33,7 +25,7 @@ const AddUserForm = (props) => {
         message: "Please enter a valid name (non-empty)",
       });
       return;
-    } else if (enteredAge === "") {
+    } else if (addedAgeInput === "") {
       // if the setError function is activated the title and message variables and their values
       // will be set on "error" variable by "setError".
       // then, when rendering it's possible to reach the information through "error.title or error.message".
@@ -44,17 +36,17 @@ const AddUserForm = (props) => {
       return;
     } else {
       const userData = {
-        name: enteredUser,
-        age: new Date(enteredAge),
+        name: addedUserInput,
+        age: new Date(addedAgeInput),
       };
       console.log(userData);
       //send the data back to parent component.
       props.onSaveNewUser(userData);
       // under we set the state of each input to empty again.
-      // this is fully accomplished setting the value of each input
-      // to variable that holds the data from the specific input (enteredUser and enteredAge).
-      setEnteredUser("");
-      setEnteredAge("");
+      // here we changed the node value to nothing.
+      // This is an approach that should not be used at all in other situations.
+      addingUser.current.value = "";
+      addingAge.current.value = "";
     }
   };
 
@@ -75,16 +67,10 @@ const AddUserForm = (props) => {
             id="username"
             type="text"
             placeholder="Type your name"
-            value={enteredUser}
-            onChange={userNameSubmit}
+            ref={addingUser}
           />
           <label htmlFor="age">Age</label>
-          <input
-            id="age"
-            type="date"
-            value={enteredAge}
-            onChange={userAgeSubmit}
-          />
+          <input id="age" type="date" ref={addingAge} />
           <Button type="submit">Add Person</Button>
         </form>
       </div>
